@@ -1,11 +1,12 @@
 <template>
   <section v-if="deckStack.length === 0" class="empty"></section>
-  <section v-else @click="clickedDeck" :class="{ stackStyle: stack }">
+  <section v-else @click="clickedDeck">
     <base-card
       v-for="item in deckStack"
       :key="item.id"
       :card="item"
       @cardClick="emitCardInfo"
+      :class="{ cardback: cardBack }"
     ></base-card>
   </section>
 </template>
@@ -18,12 +19,11 @@ export default {
     deckStack: {
       type: Array,
     },
+    cardBack: {
+      type: String,
+    },
   },
-  data() {
-    return {
-      stack: true,
-    };
-  },
+
   methods: {
     emitCardInfo(card) {
       this.$emit("cardClick2", card);
@@ -42,12 +42,18 @@ section {
 }
 
 .empty {
+  width: 10rem;
+  height: 14rem;
   border: 3px dashed white;
   border-radius: 10px;
 }
 
-.stackStyle {
+.stacked {
   display: grid;
   grid-auto-rows: 3rem;
+}
+
+.one-stack {
+  overflow: hidden;
 }
 </style>

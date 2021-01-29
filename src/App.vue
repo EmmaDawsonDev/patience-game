@@ -1,14 +1,35 @@
 <template>
   <div id="app">
     <section class="wrapper">
-      <deck-stack :deckStack="deckStack1" @cardClick2="moveToBin"></deck-stack>
-      <deck-stack :deckStack="deckStack2" @cardClick2="moveToBin"></deck-stack>
-      <deck-stack :deckStack="deckStack3" @cardClick2="moveToBin"></deck-stack>
-      <deck-stack :deckStack="deckStack4" @cardClick2="moveToBin"></deck-stack>
+      <deck-stack
+        :deckStack="deckStack1"
+        @cardClick2="moveToBin"
+        class="stacked"
+      ></deck-stack>
+      <deck-stack
+        :deckStack="deckStack2"
+        @cardClick2="moveToBin"
+        class="stacked"
+      ></deck-stack>
+      <deck-stack
+        :deckStack="deckStack3"
+        @cardClick2="moveToBin"
+        class="stacked"
+      ></deck-stack>
+      <deck-stack
+        :deckStack="deckStack4"
+        @cardClick2="moveToBin"
+        class="stacked"
+      ></deck-stack>
     </section>
     <section class="wrapper">
-      <deck-stack :deckStack="usedDeck"></deck-stack>
-      <deck-stack :deckStack="deck" @click.native="draw4cards"></deck-stack>
+      <deck-stack :deckStack="lastUsedItem" class="one-stack"></deck-stack>
+      <deck-stack
+        :deckStack="deck"
+        cardBack="true"
+        @click.native="draw4cards"
+        class="one-stack"
+      ></deck-stack>
     </section>
   </div>
 </template>
@@ -45,6 +66,13 @@ export default {
       let arrayOf4 = this.deck.slice(0, 4);
       return arrayOf4;
     },
+    lastUsedItem() {
+      if (this.usedDeck.length > 0) {
+        return [this.usedDeck[this.usedDeck.length - 1]];
+      } else {
+        return this.usedDeck;
+      }
+    },
   },
   methods: {
     moveToBin(card) {
@@ -68,6 +96,11 @@ export default {
           value: null,
         },
       ];
+
+      if (!last4cards.includes(card)) {
+        return;
+      }
+
       if (card.suite === "hearts" || card.suite === "diamonds") {
         color = "red";
       } else {

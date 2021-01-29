@@ -1,5 +1,5 @@
 <template>
-  <div class="card" @click="emitValue">
+  <section class="card" @click="emitValue">
     <section class="top">
       <img :src="cardImage" alt="" class="img-top" />
       <p>{{ cardValue }}</p>
@@ -10,7 +10,7 @@
       <img :src="cardImage" alt="" class="img-bottom" />
       <p>{{ cardValue }}</p>
     </section>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -80,5 +80,15 @@ img {
 
 section {
   text-align: center;
+}
+
+.cardback {
+  border: 5px solid white;
+  background-color: rgb(182, 25, 25);
+  background-image: url("~@/assets/dots.svg");
+
+  * {
+    display: none;
+  }
 }
 </style>
