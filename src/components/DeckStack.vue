@@ -6,7 +6,7 @@
       :key="item.id"
       :card="item"
       @cardClick="emitCardInfo"
-      :class="{ cardback: cardBack }"
+      :class="{ cardback: cardBack, stacking: stack }"
     ></base-card>
   </section>
 </template>
@@ -20,6 +20,9 @@ export default {
       type: Array,
     },
     cardBack: {
+      type: String,
+    },
+    stack: {
       type: String,
     },
   },

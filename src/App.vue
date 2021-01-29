@@ -1,25 +1,29 @@
 <template>
   <div id="app">
-    <section class="wrapper">
+    <section class="wrapper top-wrapper">
       <deck-stack
         :deckStack="deckStack1"
         @cardClick2="moveToBin"
         class="stacked"
+        stack="true"
       ></deck-stack>
       <deck-stack
         :deckStack="deckStack2"
         @cardClick2="moveToBin"
         class="stacked"
+        stack="true"
       ></deck-stack>
       <deck-stack
         :deckStack="deckStack3"
         @cardClick2="moveToBin"
         class="stacked"
+        stack="true"
       ></deck-stack>
       <deck-stack
         :deckStack="deckStack4"
         @cardClick2="moveToBin"
         class="stacked"
+        stack="true"
       ></deck-stack>
     </section>
     <section class="wrapper">
@@ -154,6 +158,9 @@ export default {
       }
     },
     draw4cards() {
+      if (this.deck.length === 0) {
+        return;
+      }
       let [c1, c2, c3, c4] = this.deck.slice(0, 4);
       this.deckStack1.push(c1);
       this.deckStack2.push(c2);
@@ -183,5 +190,9 @@ body {
   display: flex;
   justify-content: space-between;
   margin: 5rem auto;
+}
+
+.top-wrapper {
+  height: 50rem;
 }
 </style>

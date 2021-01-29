@@ -91,4 +91,10 @@ section {
     display: none;
   }
 }
+
+.stacking {
+  .bottom {
+    transform: none;
+  }
+}
 </style>
