@@ -1,10 +1,14 @@
 <template>
   <div id="app">
     <section class="wrapper">
-      <deck-stack :deckStack="deckStack1"></deck-stack>
-      <deck-stack :deckStack="deckStack2"></deck-stack>
-      <deck-stack :deckStack="deckStack3"></deck-stack>
-      <deck-stack :deckStack="deckStack4"></deck-stack>
+      <deck-stack :deckStack="deckStack1" @cardClick2="moveToBin"></deck-stack>
+      <deck-stack :deckStack="deckStack2" @cardClick2="moveToBin"></deck-stack>
+      <deck-stack :deckStack="deckStack3" @cardClick2="moveToBin"></deck-stack>
+      <deck-stack :deckStack="deckStack4" @cardClick2="moveToBin"></deck-stack>
+    </section>
+    <section class="wrapper">
+      <deck-stack :deckStack="usedDeck"></deck-stack>
+      <deck-stack :deckStack="deck" @click.native="draw4cards"></deck-stack>
     </section>
   </div>
 </template>
@@ -22,6 +26,7 @@ export default {
       deckStack2: [],
       deckStack3: [],
       deckStack4: [],
+      usedDeck: [],
     };
   },
   created() {
@@ -32,13 +37,96 @@ export default {
     this.deckStack2.push(c2);
     this.deckStack3.push(c3);
     this.deckStack4.push(c4);
-    console.log(this.deckStack1);
+    this.deck.splice(0, 4);
   },
 
   computed: {
     arrayOf4Cards() {
       let arrayOf4 = this.deck.slice(0, 4);
       return arrayOf4;
+    },
+  },
+  methods: {
+    moveToBin(card) {
+      let value = card.value;
+      let color = "";
+      let last4cards = [
+        this.deckStack1[this.deckStack1.length - 1] || {
+          suite: "",
+          value: null,
+        },
+        this.deckStack2[this.deckStack2.length - 1] || {
+          suite: "",
+          value: null,
+        },
+        this.deckStack3[this.deckStack3.length - 1] || {
+          suite: "",
+          value: null,
+        },
+        this.deckStack4[this.deckStack4.length - 1] || {
+          suite: "",
+          value: null,
+        },
+      ];
+      if (card.suite === "hearts" || card.suite === "diamonds") {
+        color = "red";
+      } else {
+        color = "black";
+      }
+
+      for (let i = 0; i < last4cards.length; i++) {
+        if (color === "red") {
+          if (
+            (last4cards[i].suite === "diamonds" ||
+              last4cards[i].suite === "hearts") &&
+            last4cards[i].value < value
+          ) {
+            switch (i) {
+              case 0:
+                this.usedDeck.push(this.deckStack1.pop());
+                break;
+              case 1:
+                this.usedDeck.push(this.deckStack2.pop());
+                break;
+              case 2:
+                this.usedDeck.push(this.deckStack3.pop());
+                break;
+              case 3:
+                this.usedDeck.push(this.deckStack4.pop());
+                break;
+            }
+          }
+        } else if (color === "black") {
+          if (
+            (last4cards[i].suite === "clubs" ||
+              last4cards[i].suite === "spades") &&
+            last4cards[i].value < value
+          ) {
+            switch (i) {
+              case 0:
+                this.usedDeck.push(this.deckStack1.pop());
+                break;
+              case 1:
+                this.usedDeck.push(this.deckStack2.pop());
+                break;
+              case 2:
+                this.usedDeck.push(this.deckStack3.pop());
+                break;
+              case 3:
+                this.usedDeck.push(this.deckStack4.pop());
+                break;
+            }
+          }
+        }
+      }
+    },
+    draw4cards() {
+      let [c1, c2, c3, c4] = this.deck.slice(0, 4);
+      this.deckStack1.push(c1);
+      this.deckStack2.push(c2);
+      this.deckStack3.push(c3);
+      this.deckStack4.push(c4);
+      this.deck.splice(0, 4);
     },
   },
 

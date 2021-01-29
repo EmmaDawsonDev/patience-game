@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="emitValue">
     <section class="top">
       <img :src="cardImage" alt="" class="img-top" />
       <p>{{ cardValue }}</p>
@@ -38,6 +38,11 @@ export default {
       return require(`../assets/${this.card.suite}.svg`);
     },
   },
+  methods: {
+    emitValue() {
+      this.$emit("cardClick", this.card);
+    },
+  },
 };
 </script>
 
@@ -51,6 +56,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  -webkit-box-shadow: 0px -4px 2px -3px #e5e5e5;
+  box-shadow: 0px -4px 2px -3px #e5e5e5;
 }
 
 img {
