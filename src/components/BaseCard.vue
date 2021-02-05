@@ -4,6 +4,7 @@
     @click="emitValue"
     :draggable="draggable"
     @dragstart="dragStart"
+    @dragend="dragEnd"
     @dragover.stop
   >
     <section class="top">
@@ -62,6 +63,11 @@ export default {
       setTimeout(() => {
         target.style.display = "none";
       }, 0);
+    },
+
+    dragEnd(e) {
+      const target = e.target;
+      target.style.display = "flex";
     },
   },
 };
