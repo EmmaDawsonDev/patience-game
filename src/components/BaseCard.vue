@@ -56,8 +56,12 @@ export default {
     },
     dragStart(e) {
       const card = this.card.id;
-      console.log("deckId", this.deckId);
+      const target = e.target;
+      this.$emit("oldArrayId", this.deckId);
       e.dataTransfer.setData("card-id", card);
+      setTimeout(() => {
+        target.style.display = "none";
+      }, 0);
     },
   },
 };

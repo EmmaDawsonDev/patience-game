@@ -5,6 +5,7 @@
         :deckStack="deckStack1"
         :id="1"
         @cardClick2="moveToBin"
+        @oldArrayId="logOldArrayId"
         @droppedCard="moveCardToNewArray"
         class="stacked"
         stack="true"
@@ -13,6 +14,7 @@
         :deckStack="deckStack2"
         :id="2"
         @cardClick2="moveToBin"
+        @oldArrayId="logOldArrayId"
         @droppedCard="moveCardToNewArray"
         class="stacked"
         stack="true"
@@ -21,6 +23,7 @@
         :deckStack="deckStack3"
         :id="3"
         @cardClick2="moveToBin"
+        @oldArrayId="logOldArrayId"
         @droppedCard="moveCardToNewArray"
         class="stacked"
         stack="true"
@@ -29,6 +32,7 @@
         :deckStack="deckStack4"
         :id="4"
         @cardClick2="moveToBin"
+        @oldArrayId="logOldArrayId"
         @droppedCard="moveCardToNewArray"
         class="stacked"
         stack="true"
@@ -66,6 +70,7 @@ export default {
       deckStack3: [],
       deckStack4: [],
       usedDeck: [],
+      oldArrayId: null,
     };
   },
   created() {
@@ -185,17 +190,52 @@ export default {
     },
     moveCardToNewArray(payload) {
       let card = this.totalDeck.find((item) => item.id == payload.cardId);
-      console.log(card);
+      console.log("old", this.oldArrayId);
 
-      if (payload.array === 1) {
-        this.deckStack1.push(card);
-      } else if (payload.array === 2) {
-        this.deckStack2.push(card);
-      } else if (payload.array === 3) {
-        this.deckStack3.push(card);
-      } else if (payload.array === 4) {
-        this.deckStack4.push(card);
+      let last4cards = [
+        this.deckStack1[this.deckStack1.length - 1] || {
+          suite: "",
+          value: null,
+        },
+        this.deckStack2[this.deckStack2.length - 1] || {
+          suite: "",
+          value: null,
+        },
+        this.deckStack3[this.deckStack3.length - 1] || {
+          suite: "",
+          value: null,
+        },
+        this.deckStack4[this.deckStack4.length - 1] || {
+          suite: "",
+          value: null,
+        },
+      ];
+
+      if (last4cards.includes(card)) {
+        if (payload.array === 1) {
+          this.deckStack1.push(card);
+        } else if (payload.array === 2) {
+          this.deckStack2.push(card);
+        } else if (payload.array === 3) {
+          this.deckStack3.push(card);
+        } else if (payload.array === 4) {
+          this.deckStack4.push(card);
+        }
+        if (this.oldArrayId === 1) {
+          this.deckStack1.pop();
+        } else if (this.oldArrayId === 2) {
+          this.deckStack2.pop();
+        } else if (this.oldArrayId === 3) {
+          this.deckStack3.pop();
+        } else if (this.oldArrayId === 4) {
+          this.deckStack4.pop();
+        }
       }
+    },
+    logOldArrayId(id) {
+      console.log(this.oldArrayId);
+      this.oldArrayId = id;
+      console.log(this.oldArrayId);
     },
   },
 

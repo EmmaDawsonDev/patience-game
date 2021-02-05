@@ -12,6 +12,7 @@
       :card="item"
       :deckId="id"
       @cardClick="emitCardInfo"
+      @oldArrayId="setOldDeckId"
       :class="{ cardback: cardBack, stacking: stack }"
     ></base-card>
   </section>
@@ -45,9 +46,15 @@ export default {
     },
     dropCard(e) {
       const cardId = e.dataTransfer.getData("card-id");
-      console.log("cardID:", cardId);
-      console.log("dropped", this.id);
-      this.$emit("droppedCard", { array: this.id, cardId });
+
+      this.$emit("droppedCard", {
+        array: this.id,
+
+        cardId,
+      });
+    },
+    setOldDeckId(id) {
+      this.$emit("oldArrayId", id);
     },
   },
 };
