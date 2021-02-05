@@ -1,5 +1,11 @@
 <template>
-  <section class="card" @click="emitValue">
+  <section
+    class="card"
+    @click="emitValue"
+    :draggable="draggable"
+    @dragstart="dragStart"
+    @dragover.stop
+  >
     <section class="top">
       <img :src="cardImage" alt="" class="img-top" />
       <p>{{ cardValue }}</p>
@@ -17,6 +23,12 @@
 export default {
   props: {
     card: Object,
+    deckId: Number,
+  },
+  data() {
+    return {
+      draggable: true,
+    };
   },
   computed: {
     cardValue() {
@@ -41,6 +53,15 @@ export default {
   methods: {
     emitValue() {
       this.$emit("cardClick", this.card);
+    },
+    dragStart(e) {
+      const card = this.card.id;
+      const target = e.target;
+      this.$emit("oldArrayId", this.deckId);
+      e.dataTransfer.setData("card-id", card);
+      setTimeout(() => {
+        target.style.display = "none";
+      }, 0);
     },
   },
 };

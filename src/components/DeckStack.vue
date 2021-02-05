@@ -1,11 +1,18 @@
 <template>
-  <section v-if="deckStack.length === 0" class="empty"></section>
+  <section
+    v-if="deckStack.length === 0"
+    class="empty"
+    @dragover.prevent
+    @drop.prevent="dropCard"
+  ></section>
   <section v-else @click="clickedDeck">
     <base-card
       v-for="item in deckStack"
       :key="item.id"
       :card="item"
+      :deckId="id"
       @cardClick="emitCardInfo"
+      @oldArrayId="setOldDeckId"
       :class="{ cardback: cardBack, stacking: stack }"
     ></base-card>
   </section>
@@ -18,6 +25,9 @@ export default {
   props: {
     deckStack: {
       type: Array,
+    },
+    id: {
+      type: Number,
     },
     cardBack: {
       type: String,
@@ -33,6 +43,18 @@ export default {
     },
     clickedDeck() {
       this.$emit("clickedOnDeck");
+    },
+    dropCard(e) {
+      const cardId = e.dataTransfer.getData("card-id");
+
+      this.$emit("droppedCard", {
+        array: this.id,
+
+        cardId,
+      });
+    },
+    setOldDeckId(id) {
+      this.$emit("oldArrayId", id);
     },
   },
 };
@@ -53,7 +75,7 @@ section {
 
 .stacked {
   display: grid;
-  grid-auto-rows: 3rem;
+  grid-auto-rows: 1.5rem;
 }
 
 .one-stack {
