@@ -3,33 +3,46 @@
     <section class="wrapper top-wrapper">
       <deck-stack
         :deckStack="deckStack1"
+        :id="1"
         @cardClick2="moveToBin"
+        @droppedCard="moveCardToNewArray"
         class="stacked"
         stack="true"
       ></deck-stack>
       <deck-stack
         :deckStack="deckStack2"
+        :id="2"
         @cardClick2="moveToBin"
+        @droppedCard="moveCardToNewArray"
         class="stacked"
         stack="true"
       ></deck-stack>
       <deck-stack
         :deckStack="deckStack3"
+        :id="3"
         @cardClick2="moveToBin"
+        @droppedCard="moveCardToNewArray"
         class="stacked"
         stack="true"
       ></deck-stack>
       <deck-stack
         :deckStack="deckStack4"
+        :id="4"
         @cardClick2="moveToBin"
+        @droppedCard="moveCardToNewArray"
         class="stacked"
         stack="true"
       ></deck-stack>
     </section>
     <section class="wrapper">
-      <deck-stack :deckStack="lastUsedItem" class="one-stack"></deck-stack>
+      <deck-stack
+        :deckStack="lastUsedItem"
+        :id="5"
+        class="one-stack"
+      ></deck-stack>
       <deck-stack
         :deckStack="deck"
+        :id="6"
         cardBack="true"
         @click.native="draw4cards"
         class="one-stack"
@@ -46,6 +59,7 @@ export default {
   components: { DeckStack },
   data() {
     return {
+      totalDeck: [],
       deck: [],
       deckStack1: [],
       deckStack2: [],
@@ -56,6 +70,7 @@ export default {
   },
   created() {
     this.deck = generateDeck();
+    this.totalDeck = this.deck.map((x) => x);
     this.deck = shuffleDeck(this.deck);
     let [c1, c2, c3, c4] = this.arrayOf4Cards;
     this.deckStack1.push(c1);
@@ -168,6 +183,20 @@ export default {
       this.deckStack4.push(c4);
       this.deck.splice(0, 4);
     },
+    moveCardToNewArray(payload) {
+      let card = this.totalDeck.find((item) => item.id == payload.cardId);
+      console.log(card);
+
+      if (payload.array === 1) {
+        this.deckStack1.push(card);
+      } else if (payload.array === 2) {
+        this.deckStack2.push(card);
+      } else if (payload.array === 3) {
+        this.deckStack3.push(card);
+      } else if (payload.array === 4) {
+        this.deckStack4.push(card);
+      }
+    },
   },
 
   name: "App",
@@ -193,6 +222,6 @@ body {
 }
 
 .top-wrapper {
-  height: 50rem;
+  height: 30rem;
 }
 </style>

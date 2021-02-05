@@ -8,7 +8,7 @@ export default function generateDeck() {
       deck.push(createCard(suite, i));
     }
   }
-
+  console.log(deck);
   return deck;
 }
 
