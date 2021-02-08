@@ -3,7 +3,7 @@
     <span @click="reloadGame"
       ><img src="@/assets/reload.svg" alt="reload arrow"
     /></span>
-    <span
+    <span @click="openModal"
       ><img
         class="instructions"
         src="@/assets/question.svg"
@@ -17,6 +17,9 @@ export default {
   methods: {
     reloadGame() {
       this.$emit("clickRestart");
+    },
+    openModal() {
+      this.$emit("clickedOnQuestion");
     },
   },
 };

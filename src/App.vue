@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <nav-bar @clickRestart="restartGame"></nav-bar>
+    <nav-bar
+      @clickRestart="restartGame"
+      @clickedOnQuestion="openTheModal"
+    ></nav-bar>
+    <base-modal v-if="modalOpen" @clickedModalBg="closeTheModal"></base-modal>
     <section class="wrapper top-wrapper">
       <deck-stack
         :deckStack="deckStack1"
@@ -57,12 +61,13 @@
 </template>
 
 <script>
+import BaseModal from "./components/BaseModal.vue";
 import DeckStack from "./components/DeckStack.vue";
 import NavBar from "./components/NavBar.vue";
 import generateDeck, { shuffleDeck } from "./game/index.js";
 
 export default {
-  components: { DeckStack, NavBar },
+  components: { DeckStack, NavBar, BaseModal },
   data() {
     return {
       totalDeck: [],
@@ -73,6 +78,7 @@ export default {
       deckStack4: [],
       usedDeck: [],
       oldArrayId: null,
+      modalOpen: false,
     };
   },
   created() {
@@ -257,6 +263,12 @@ export default {
       this.deckStack3.push(c3);
       this.deckStack4.push(c4);
       this.deck.splice(0, 4);
+    },
+    closeTheModal() {
+      this.modalOpen = false;
+    },
+    openTheModal() {
+      this.modalOpen = true;
     },
   },
 
