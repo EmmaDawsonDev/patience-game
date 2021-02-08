@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav-bar></nav-bar>
+    <nav-bar @clickRestart="restartGame"></nav-bar>
     <section class="wrapper top-wrapper">
       <deck-stack
         :deckStack="deckStack1"
@@ -238,6 +238,25 @@ export default {
       console.log(this.oldArrayId);
       this.oldArrayId = id;
       console.log(this.oldArrayId);
+    },
+    restartGame() {
+      (this.totalDeck = []),
+        (this.deck = []),
+        (this.deckStack1 = []),
+        (this.deckStack2 = []),
+        (this.deckStack3 = []),
+        (this.deckStack4 = []),
+        (this.usedDeck = []),
+        (this.oldArrayId = null),
+        (this.deck = generateDeck());
+      this.totalDeck = this.deck.map((x) => x);
+      this.deck = shuffleDeck(this.deck);
+      let [c1, c2, c3, c4] = this.arrayOf4Cards;
+      this.deckStack1.push(c1);
+      this.deckStack2.push(c2);
+      this.deckStack3.push(c3);
+      this.deckStack4.push(c4);
+      this.deck.splice(0, 4);
     },
   },
 

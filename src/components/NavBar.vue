@@ -1,6 +1,8 @@
 <template>
   <nav>
-    <span><img src="@/assets/reload.svg" alt="reload arrow"/></span>
+    <span @click="reloadGame"
+      ><img src="@/assets/reload.svg" alt="reload arrow"
+    /></span>
     <span
       ><img
         class="instructions"
@@ -11,7 +13,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    reloadGame() {
+      this.$emit("clickRestart");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -30,6 +38,7 @@ nav {
     border-radius: 50%;
     display: grid;
     place-items: center;
+    cursor: pointer;
 
     img {
       width: 80%;
