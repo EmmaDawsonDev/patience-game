@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <nav-bar></nav-bar>
     <section class="wrapper top-wrapper">
       <deck-stack
         :deckStack="deckStack1"
@@ -57,10 +58,11 @@
 
 <script>
 import DeckStack from "./components/DeckStack.vue";
+import NavBar from "./components/NavBar.vue";
 import generateDeck, { shuffleDeck } from "./game/index.js";
 
 export default {
-  components: { DeckStack },
+  components: { DeckStack, NavBar },
   data() {
     return {
       totalDeck: [],
@@ -258,7 +260,7 @@ body {
   max-width: 48rem;
   display: flex;
   justify-content: space-between;
-  margin: 5rem auto;
+  margin: 3rem auto;
 }
 
 .top-wrapper {
