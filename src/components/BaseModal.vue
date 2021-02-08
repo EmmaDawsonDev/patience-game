@@ -1,6 +1,9 @@
 <template>
   <section @click="closeModal" ref="section">
-    <article>Instructions</article>
+    <article>
+      <h3>{{ $t("instructions.title") }}</h3>
+      <p>{{ $t("instructions.body") }}</p>
+    </article>
   </section>
 </template>
 
@@ -29,9 +32,18 @@ section {
   z-index: 1;
 
   article {
+    max-width: 16rem;
     background-color: white;
     padding: 2rem;
     border-radius: 10px;
+
+    h3 {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      line-height: 1.5;
+    }
   }
 }
 </style>

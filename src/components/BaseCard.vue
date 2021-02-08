@@ -85,6 +85,7 @@ export default {
   justify-content: space-between;
   -webkit-box-shadow: 0px -4px 2px -3px #e5e5e5;
   box-shadow: 0px -4px 2px -3px #e5e5e5;
+  cursor: pointer;
 }
 
 img {
