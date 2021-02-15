@@ -147,7 +147,13 @@ img {
 
 .bottom {
   align-self: flex-end;
-  transform: rotate(180deg);
+  
+}
+
+.card:last-of-type {
+  .bottom {
+    transform: rotate(180deg);
+  }
 }
 
 .top {

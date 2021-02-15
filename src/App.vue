@@ -4,7 +4,9 @@
       @clickRestart="restartGame"
       @clickedOnQuestion="openTheModal"
     ></nav-bar>
+    <transition name="fade">
     <base-modal v-if="modalOpen" @clickedModalBg="closeTheModal"></base-modal>
+    </transition>
     <section class="wrapper top-wrapper">
       <deck-stack
         :deckStack="deckStack1"
@@ -57,7 +59,9 @@
         class="one-stack"
       ></deck-stack>
     </section>
+    <transition name="fade">
     <winner-alert v-if="winnerAlertOpen" @clickRestart="restartGame"></winner-alert>
+    </transition>
   </div>
 </template>
 
@@ -340,5 +344,20 @@ body {
     
     height: 20rem;
   }
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease
 }
 </style>

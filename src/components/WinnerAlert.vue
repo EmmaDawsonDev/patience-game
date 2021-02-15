@@ -1,5 +1,9 @@
 <template>
 <div>
+  <div class="pyro">
+  <div class="before"></div>
+  <div class="after"></div>
+</div>
 <section>
   <h2>{{ $t("winner.title") }}</h2>
   <p>{{ $t("winner.body") }}</p>
@@ -60,6 +64,7 @@ section {
 
     
 }
+
 
 
 </style>
