@@ -31,11 +31,13 @@ div {
 }
 
 section {
-  max-width: 16rem;
+    width: 18rem;
     background-color: white;
     padding: 2rem;
     border-radius: 10px;
     text-align: center;
+    border: 2px solid #e3e3e3;
+    
 
     h2, p {
       margin-bottom: 1rem;

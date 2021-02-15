@@ -314,9 +314,31 @@ body {
   display: flex;
   justify-content: space-between;
   margin: 3rem auto;
+
+  @media (max-width: 770px) {
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 680px) {
+    margin: 1rem 0;
+  }
 }
 
 .top-wrapper {
   height: 30rem;
+
+  @media (max-width: 680px) {
+    height: 28rem;
+  }
+
+  @media (max-width: 530px) {
+    
+    height: 25rem;
+  }
+
+  @media (max-width: 360px) {
+    
+    height: 20rem;
+  }
 }
 </style>

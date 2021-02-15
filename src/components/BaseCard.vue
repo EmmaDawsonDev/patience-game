@@ -86,6 +86,28 @@ export default {
   -webkit-box-shadow: 0px -4px 2px -3px #e5e5e5;
   box-shadow: 0px -4px 2px -3px #e5e5e5;
   cursor: pointer;
+
+  @media (max-width: 680px) {
+    width: 7.5rem;
+    height: 10.5rem;
+  }
+
+  @media (max-width: 530px) {
+    width: 5rem;
+    height: 7rem;
+  }
+
+  @media (max-width: 360px) {
+    width: 4.3rem;
+    height: 5.9rem;
+  }
+
+  p {
+    @media (max-width: 530px) {
+    font-size: .6rem;
+    line-height: 0.7;
+  }
+  }
 }
 
 img {
@@ -94,6 +116,32 @@ img {
   &.img-middle {
     width: 2.5rem;
     align-self: center;
+
+    @media (max-width: 680px) {
+    width: 2rem;
+    }
+
+    @media (max-width: 530px) {
+    width: 1.4rem;
+    }
+
+    @media (max-width: 360px) {
+    width: 1.1rem;
+    
+  }
+  }
+
+  @media (max-width: 680px) {
+    width: 1rem;
+    
+  }
+
+  @media (max-width: 530px) {
+    width: 0.7rem;
+    }
+    @media (max-width: 360px) {
+    width: 0.6rem;
+    
   }
 }
 

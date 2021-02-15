@@ -60,10 +60,23 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 section {
   width: 10rem;
   height: 14rem;
+
+  @media (max-width: 680px) {
+    width: 7.5rem;
+    height: 10.5rem;
+  } 
+  @media (max-width: 530px) {
+    width: 5rem;
+    height: 7rem;
+  }
+  @media (max-width: 360px) {
+    width: 4.3rem;
+    height: 5.9rem;
+  }
 }
 
 .empty {
@@ -71,11 +84,30 @@ section {
   height: 14rem;
   border: 3px dashed white;
   border-radius: 10px;
+
+  @media (max-width: 680px) {
+    width: 7.5rem;
+    height: 10.5rem;
+  } 
+  @media (max-width: 530px) {
+    border: 2px dashed white;
+    width: 5rem;
+    height: 7rem;
+  }
+  @media (max-width: 360px) {
+    width: 4.3rem;
+    height: 5.9rem;
+  }
+  
 }
 
 .stacked {
   display: grid;
   grid-auto-rows: 1.5rem;
+
+  @media (max-width: 360px) {
+    grid-auto-rows: 1.2rem;
+  }
 }
 
 .one-stack {
