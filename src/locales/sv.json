@@ -2,5 +2,11 @@
   "instructions": {
     "title": "Instruktioner",
     "body": "En patiens där målet är att sluta med fyra äss i högarna. Patiensen börjar med 4 slumpade kort i varsin hög. Kort som har högre valör slår ut andra kort i samma färg. Det översta kortet från vilken hög som helst kan flyttas till en tom hög."
+  },
+  "winner": {
+    "title": "Du vinner!",
+    "body": "Vill du spela en gång till?",
+    "yes": "ja"
+    
   }
 }

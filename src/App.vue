@@ -57,6 +57,7 @@
         class="one-stack"
       ></deck-stack>
     </section>
+    <winner-alert v-if="winnerAlertOpen" @clickRestart="restartGame"></winner-alert>
   </div>
 </template>
 
@@ -65,9 +66,10 @@ import BaseModal from "./components/BaseModal.vue";
 import DeckStack from "./components/DeckStack.vue";
 import NavBar from "./components/NavBar.vue";
 import generateDeck, { shuffleDeck } from "./game/index.js";
+import WinnerAlert from "./components/WinnerAlert.vue"
 
 export default {
-  components: { DeckStack, NavBar, BaseModal },
+  components: { DeckStack, NavBar, BaseModal, WinnerAlert },
   data() {
     return {
       totalDeck: [],
@@ -79,6 +81,7 @@ export default {
       usedDeck: [],
       oldArrayId: null,
       modalOpen: false,
+      
     };
   },
   created() {
@@ -105,6 +108,22 @@ export default {
         return this.usedDeck;
       }
     },
+    winnerAlertOpen() {
+      if (this.deckStack1.length === 1 &&
+          this.deckStack2.length === 1 &&
+          this.deckStack3.length === 1 &&
+          this.deckStack4.length === 1 &&
+          this.deckStack1[0].value === 14 &&
+          this.deckStack2[0].value === 14 &&
+          this.deckStack3[0].value === 14 &&
+          this.deckStack4[0].value === 14
+      ) {
+        
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   methods: {
     moveToBin(card) {

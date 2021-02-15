@@ -2,5 +2,12 @@
   "instructions": {
     "title": "Instructions",
     "body": "The aim of the game is to only have 4 aces left. You start with 4 randomly drawn cards in each pile. Click on a card to remove any cards of same color and lower value. The top card in any pile can be dragged to an empty pile to reveal the card underneath."
+  },
+  "winner": {
+    "title": "You win!",
+    "body": "Do you want to play again?",
+    "yes": "yes"
+    
+    
   }
 }
